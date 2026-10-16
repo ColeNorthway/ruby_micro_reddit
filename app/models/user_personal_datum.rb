@@ -1,0 +1,2 @@
+class UserPersonalDatum < ApplicationRecord
+end

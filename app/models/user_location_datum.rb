@@ -1,0 +1,2 @@
+class UserLocationDatum < ApplicationRecord
+end
