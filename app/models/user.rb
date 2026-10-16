@@ -6,4 +6,6 @@ class User < ApplicationRecord
   has_one :user_location_datum, dependent: :destroy, required: true
   has_one :user_login_datum, dependent: :destroy, required: true
   has_one :user_personal_datum, dependent: :destroy, required: true
+  has_many :posts
+  has_many :comments
 end
