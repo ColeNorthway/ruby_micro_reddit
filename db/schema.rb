@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_16_033132) do
   create_table "comments", force: :cascade do |t|
     t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "users_id", null: false
+    t.integer "posts_id", null: false
+    t.index ["posts_id"], name: "index_comments_on_posts_id"
+    t.index ["users_id"], name: "index_comments_on_users_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -22,7 +26,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "users_id", null: false
     t.index ["name"], name: "index_posts_on_name", unique: true
+    t.index ["users_id"], name: "index_posts_on_users_id"
   end
 
   create_table "user_location_data", force: :cascade do |t|
@@ -62,6 +68,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "comments", "posts", column: "posts_id"
+  add_foreign_key "comments", "users", column: "users_id"
+  add_foreign_key "posts", "users", column: "users_id"
   add_foreign_key "user_location_data", "users"
   add_foreign_key "user_login_data", "users"
   add_foreign_key "user_personal_data", "users"
