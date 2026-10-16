@@ -1,5 +1,7 @@
 class AddUsersRefToUserLoginData < ActiveRecord::Migration[8.1]
   def change
-    add_reference :user_login_data, :users, null: false, foreign_key: true
+    change_table :user_login_data do |t|
+      t.belongs_to :user, index: { unique: true }, foreign_key: true, null: false
+    end
   end
 end

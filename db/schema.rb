@@ -31,8 +31,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "users_id", null: false
-    t.index ["users_id"], name: "index_user_location_data_on_users_id"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_user_location_data_on_user_id", unique: true
   end
 
   create_table "user_login_data", force: :cascade do |t|
@@ -40,9 +40,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "users_id", null: false
+    t.integer "user_id", null: false
     t.index ["email"], name: "index_user_login_data_on_email", unique: true
-    t.index ["users_id"], name: "index_user_login_data_on_users_id"
+    t.index ["user_id"], name: "index_user_login_data_on_user_id", unique: true
   end
 
   create_table "user_personal_data", force: :cascade do |t|
@@ -51,8 +51,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
     t.date "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "users_id", null: false
-    t.index ["users_id"], name: "index_user_personal_data_on_users_id"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_user_personal_data_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,7 +62,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "user_location_data", "users", column: "users_id"
-  add_foreign_key "user_login_data", "users", column: "users_id"
-  add_foreign_key "user_personal_data", "users", column: "users_id"
+  add_foreign_key "user_location_data", "users"
+  add_foreign_key "user_login_data", "users"
+  add_foreign_key "user_personal_data", "users"
 end
