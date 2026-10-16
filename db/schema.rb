@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_16_015454) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_16_024009) do
   create_table "comments", force: :cascade do |t|
     t.string "body"
     t.datetime "created_at", null: false
@@ -31,6 +31,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_015454) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "users_id", null: false
+    t.index ["users_id"], name: "index_user_location_data_on_users_id"
   end
 
   create_table "user_login_data", force: :cascade do |t|
@@ -38,7 +40,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_015454) do
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "users_id", null: false
     t.index ["email"], name: "index_user_login_data_on_email", unique: true
+    t.index ["users_id"], name: "index_user_login_data_on_users_id"
   end
 
   create_table "user_personal_data", force: :cascade do |t|
@@ -47,6 +51,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_015454) do
     t.date "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "users_id", null: false
+    t.index ["users_id"], name: "index_user_personal_data_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,4 +61,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_015454) do
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true
   end
+
+  add_foreign_key "user_location_data", "users", column: "users_id"
+  add_foreign_key "user_login_data", "users", column: "users_id"
+  add_foreign_key "user_personal_data", "users", column: "users_id"
 end
