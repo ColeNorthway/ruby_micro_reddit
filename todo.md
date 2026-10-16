@@ -2,7 +2,7 @@
 ~~1) Generate our models with basic types~~
 1) Fill out any qualifiers for columns we missed
    ~~+ Things like relations between data (has oneand has many)~~
-  + Make sure some fields cannot be null
+   ~~+ Make sure some fields cannot be null~~
   + Dependant 
     + User is deleted so is all of their data
       + Only user data forget about comments and posts (they can persist!)
